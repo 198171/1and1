@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温馨小弹窗</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #fff; }
+        .popup {
+            position: fixed;
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-family: "微软雅黑", sans-serif;
+            z-index: 9999;
+            user-select: none;
+            border: 2px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<script>
+const TIPS = [
+    "多喝水，不然CPU要烧干啦",
+    "起来走两步，屁股会感谢你的",
+    "yjy",
+    "偷偷告诉你：你超棒的！",
+    "眼睛累了就看远处30秒～",
+    "今天也要开心呀！",
+    "记得吃早餐，生活有仪式感",
+    "摸摸鱼，不过别被发现啦",
+    "2006.1229",
+    "放松一下，世界很温柔",
+    "给生活比个耶 ✌️",
+    "1+1",
+    "今天也要闪闪发光呀",
+    "累了就歇会儿，没关系的",
+    "你超可爱，不许反驳",
+    "超绝1就1",
+    "微风不燥，岁月静好",
+    "吃点甜的，心情会起飞",
+    "平安喜乐，万事胜意",
+    "生活点滴温柔都值得收藏",
+    "愿你眼里的光，永远不灭",
+    "今天也是被爱的一天",
+    "别焦虑，一切都会刚刚好",
+    "你值得所有美好",
+    "小确幸正在向你奔来",
+    "保持微笑，好运自来",
+    "生活很甜，你也是",
+    "记得常抬头看看天空",
+    "允许一切发生，你很自由",
+    "慢慢来，谁都有发光的机会"
+];
+
+const BG_COLORS = [
+    "#FFE6E6", "#E6F7FF", "#E6FFE6", "#FFF6E6", "#F6E6FF",
+    "#FFE0F0", "#E0F7FF", "#FFE0E0", "#F0FFF0", "#F5F5DC"
+];
+
+const BORDER_TYPES = ["solid", "groove", "ridge", "double"];
+
+function createPopup() {
+    const popup = document.createElement("div");
+    popup.className = "popup";
+    popup.innerText = TIPS[Math.floor(Math.random() * TIPS.length)];
+    
+    const bg = BG_COLORS[Math.floor(Math.random() * BG_COLORS.length)];
+    popup.style.backgroundColor = bg;
+    popup.style.borderStyle = BORDER_TYPES[Math.floor(Math.random() * BORDER_TYPES.length)];
+    
+    const width = 240 + Math.floor(Math.random() * 60);
+    const height = 65 + Math.floor(Math.random() * 15);
+    popup.style.width = `${width}px`;
+    popup.style.height = `${height}px`;
+    
+    const left = Math.floor(Math.random() * (window.innerWidth - width));
+    const top = Math.floor(Math.random() * (window.innerHeight - height));
+    popup.style.left = `${left}px`;
+    popup.style.top = `${top}px`;
+    
+    document.body.appendChild(popup);
+    
+    const duration = 2500 + Math.floor(Math.random() * 1500);
+    setTimeout(() => popup.remove(), duration);
+}
+
+async function startPopups(count = 120) {
+    for (let i = 0; i < count; i++) {
+        createPopup();
+        await new Promise(resolve => setTimeout(resolve, 40 + Math.floor(Math.random() * 40)));
+    }
+}
+
+window.onload = startPopups;
+</script>
+</body>
+</html>
